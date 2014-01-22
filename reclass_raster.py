@@ -1,28 +1,12 @@
 #!/usr/bin/env python
-###############################################################################
-# reclass_raster.py
-#
-# Purpose:  Convert raster of continuous values into discrete categories
-# Auther:   Matthew Perry, perrygeo@gmail.com
-#
-###############################################################################
-# Copyright (c) 2011, Matthew Perry
-# 
-# This library is free software; you can redistribute it and/or
-# modify it under the terms of the GNU Library General Public
-# License as published by the Free Software Foundation; either
-# version 2 of the License, or (at your option) any later version.
-# 
-# This library is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Library General Public License for more details.
-# 
-# You should have received a copy of the GNU Library General Public
-# License along with this library; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-# Boston, MA 02111-1307, USA.
-###############################################################################
+USAGE = """
+Reclassify raster from continuous values to discrete classes
+Example usage:
+    python reclass_raster.py input.tif classes.cfg output.tif
+
+where classes.cfg contains lines like:
+    min,max,class
+"""
 import sys
 import numpy
 from osgeo import gdal
@@ -56,9 +40,7 @@ if __name__ == '__main__':
     gdal.AllRegister()
     argv = gdal.GeneralCmdLineProcessor( sys.argv )
     if len(argv) < 4:
-        print "python reclass_raster.py input.tif classes.cfg output.tif"
-        print "where classes.cfg contains lines like:"
-        print "min,max,class"
+        print USAGE
         sys.exit( 0 )
 
     cont = gdal.Open( argv[1], gdal.GA_ReadOnly )
