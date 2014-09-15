@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+use Geo::Coordinates::DecimalDegrees;
+
+my ($dd) = @ARGV;
+
+($deg, $min, $sec) = decimal2dms($dd);
+print "$deg $min' $sec\"\n";
+
+($deg, $min) = decimal2dm($dd);
+print "$deg $min'\n";
+

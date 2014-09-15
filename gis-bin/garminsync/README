@@ -1,0 +1,32 @@
+How to use
+==========
+
+In order to use this program you need to have (at least) PyUSB and
+ElementTree installed. You also need to make sure that the garmin_gps
+*is not loaded*, so do this after you've connected your GPS to make
+sure it's not loaded:
+
+    sudo modprobe -r garmin_gps
+
+After this you should be able to download data from your Forerunner or
+Edge that are connected via USB, by executing garmin-sync without any
+arguments:
+
+    ./garmin-sync
+
+If you get permission complaints, try running it with root privileges.
+
+    sudo ./garmin-sync
+
+This should print out a message saying that it's downloading data from
+the GPS, and also export all runs into a TCX format in the 'exports'
+directory. There will be one file per run.
+
+This software is experimental at the moment, so don't expect it to work
+all the time. If you get an error, try running it again. If you still
+get an error, try unplug and reconnect your GPS and try running it
+again.
+
+If you have an questions/suggestion, send an e-mail to
+bjorn.tillenius@gmail.com. You can also file bugs at
+https://bugs.launchpad.net/garmin-sync.

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+  echo "usage: kml2shp input.kml output.shp"
+  exit
+fi
+
+echo "Processing KML file"
+#sed 's/ xmlns=\"http\:\/\/earth.google.com\/kml\/2.0\"//' $1 > /tmp/temp.kml
+sed 's/ xmlns=\"http\:\/\/earth.google.com\/kml\/2.1\"//' $1 > /tmp/temp.kml
+xsltproc -o /tmp/temp.gml /usr/local/share/kml2gml/kml2gml.xsl /tmp/temp.kml
+
+echo "Creating new Shapefile"
+ogr2ogr $2 /tmp/temp.gml myFeature
+
+echo "Cleaning up temp files"
+rm /tmp/temp.gml
+rm /tmp/temp.kml
+
+echo "New shapefile has been created:"
+echo $2 
+

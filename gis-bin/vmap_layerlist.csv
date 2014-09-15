@@ -1,0 +1,62 @@
+Boundaries,bnd,"Political Boundary",point,polbndp,pft,polbndp@bnd(*)_point
+Boundaries,bnd,Barrier,line,barrierl,lft,barrierl@bnd(*)_line
+Boundaries,bnd,Coast,line,coastl,lft,coastl@bnd(*)_line
+Boundaries,bnd,Depth,line,depthl,lft,depthl@bnd(*)_line
+Boundaries,bnd,"Political Boundary",line,polbndl,lft,polbndl@bnd(*)_line
+Boundaries,bnd,Ocean/Sea,area,oceansea,aft,oceansea@bnd(*)_area
+Boundaries,bnd,"Political Boundary",area,polbnda,aft,polbnda@bnd(*)_area
+Boundaries,bnd,Boundaries,text,bndtxt,tft,bndtxt@bnd(*)_text
+"Data Quality",dq,"Data Quality",line,dqline,lft,dqline@dq(*)_line
+"Data Quality",dq,"Data Quality",area,dqarea,aft,dqarea@dq(*)_area
+"Data Quality",dq,"Data Quality",text,dqtxt,tft,dqtxt@dq(*)_text
+Elevation,elev,Elevation,point,elevp,pft,elevp@elev(*)_point
+Elevation,elev,Contour,line,contourl,lft,contourl@elev(*)_line
+Hydrography,hydro,Danger,point,dangerp,pft,dangerp@hydro(*)_point
+Hydrography,hydro,Miscellaneous,point,miscp,pft,miscp@hydro(*)_point
+Hydrography,hydro,Aqueduct/Canal/Flume/Penstock,line,aquecanl,lft,aquecanl@hydro(*)_line
+Hydrography,hydro,Danger,line,dangerl,lft,dangerl@hydro(*)_line
+Hydrography,hydro,Miscellaneous,line,miscl,lft,miscl@hydro(*)_line
+Hydrography,hydro,"Water Course",line,watrcrsl,lft,watrcrsl@hydro(*)_line
+Hydrography,hydro,"Inland Water",area,inwatera,aft,inwatera@hydro(*)_area
+Hydrography,hydro,Hydrography,text,hydrotxt,tft,hydrotxt@hydro(*)_text
+Industry,ind,Extraction,point,extractp,pft,extractp@ind(*)_point
+Industry,ind,"Miscellaneous Industry",point,misindp,pft,misindp@ind(*)_point
+Industry,ind,Storage,point,storagep,pft,storagep@ind(*)_point
+Industry,ind,Extraction,area,extracta,aft,extracta@ind(*)_area
+Industry,ind,"Fishery Industry",area,fishinda,aft,fishinda@ind(*)_area
+Industry,ind,Industry,text,indtxt,tft,indtxt@ind(*)_text
+Physiography,phys,Cut/Fill,line,cutfill,lft,cutfill@phys(*)_line
+Physiography,phys,Landform,line,lndfrml,lft,lndfrml@phys(*)_line
+Physiography,phys,Ground,area,grounda,aft,grounda@phys(*)_area
+Physiography,phys,"Land Ice",area,landicea,aft,landicea@phys(*)_area
+Physiography,phys,"Sea Ice",area,seaicea,aft,seaicea@phys(*)_area
+Physiography,phys,Physiography,text,phystxt,tft,phystxt@phys(*)_text
+Population,pop,"Built-Up area",point,builtupp,pft,builtupp@pop(*)_point
+Population,pop,"Miscellaneous Population",point,mispopp,pft,mispopp@pop(*)_point
+Population,pop,"Built-Up area",area,builtupa,aft,builtupa@pop(*)_area
+Population,pop,"Miscellaneous Population",area,mispopa,aft,mispopa@pop(*)_area
+Population,pop,Population,text,poptxt,tft,poptxt@pop(*)_text
+Transportation,trans,Airport,point,aerofacp,pft,aerofacp@trans(*)_point
+Transportation,trans,"Railroad Yard",point,rryardp,pft,rryardp@trans(*)_point
+Transportation,trans,"Transportation Structures",node,transtrc,pft,transtrc@trans(*)_node
+Transportation,trans,"Miscellaneous Transportation",line,mistranl,lft,mistranl@trans(*)_line
+Transportation,trans,Railroad,line,railrdl,lft,railrdl@trans(*)_line
+Transportation,trans,Road,line,roadl,lft,roadl@trans(*)_line
+Transportation,trans,"Trails and Tracks",line,traill,lft,traill@trans(*)_line
+Transportation,trans,"Transportation Structures",line,transtrl,lft,transtrl@trans(*)_line
+Transportation,trans,Transportation,text,transtxt,tft,transtxt@trans(*)_text
+Utilities,util,Utility,point,utilp,pft,utilp@util(*)_point
+Utilities,util,Pipeline,line,pipel,lft,pipel@util(*)_line
+Utilities,util,Utility,line,utill,lft,utill@util(*)_line
+Utilities,util,Utilities,text,utiltxt,tft,utiltxt@util(*)_text
+Vegetation,veg,Firebreak,line,firebrkl,lft,firebrkl@veg(*)_line
+Vegetation,veg,Hedge,line,hedgel,lft,hedgel@veg(*)_line
+Vegetation,veg,Cropland,area,cropa,aft,cropa@veg(*)_area
+Vegetation,veg,Grassland,area,grassa,aft,grassa@veg(*)_area
+Vegetation,veg,Oasis,area,oasisa,aft,oasisa@veg(*)_area
+Vegetation,veg,Orchard,area,orcharda,aft,orcharda@veg(*)_area
+Vegetation,veg,Marsh/Swamp,area,swampa,aft,swampa@veg(*)_area
+Vegetation,veg,Trees,area,treesa,aft,treesa@veg(*)_area
+Vegetation,veg,Tundra,area,tundraa,aft,tundraa@veg(*)_area
+Vegetation,veg,"Vegetation Void Collection",area,vegvoida,aft,vegvoida@veg(*)_area
+Vegetation,veg,Vegetation,text,vegtxt,tft,vegtxt@veg(*)_text

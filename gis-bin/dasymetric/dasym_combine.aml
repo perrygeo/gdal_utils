@@ -1,0 +1,77 @@
+/*------------------------------------------
+/* dasym_combine.aml
+/*  
+/* Combines layers for dasymetric mapping
+/* NOTE ALL OUTPUT DATASET NEED FULL PATH!
+/*
+/* Usage: 
+/* &run dasym_combine.aml <Raster(Units)> <Lookup Table> 
+/*                        <Join Item> <Attribute> <Aux. Raster>
+/*                        <Output Raster> <Output Table> <temp space>
+/* Example:
+/*   &run dasym_combine.aml C:\WorkSpace\FAO\dasym_test\grids\code 
+/*        C:\WorkSpace\FAO\dasym_test\lookups\data.dbf code TFC9302    
+/*        C:\WorkSpace\FAO\dasym_test\grids\landcover2 C:\WorkSpace\FAO\dasym_test\try3\combine
+/*        C:\WorkSpace\FAO\dasym_test\try3\combine.dbf
+/*
+/* Written By: Matthew Perry
+/* Modified  : 1/12/06
+/*--------------------------------------------
+
+&ARGS .unitsraster .lookup .joinitem .attribute .auxrast .outrast .outdbf .tempw
+
+/*--------------------------------------
+/* Check Args
+/*
+&IF [NULL %.unitsraster%] or [NULL %.lookup%] or [NULL %.joinitem%] or [NULL %.attribute%] or [NULL %.auxrast%] or [NULL %.outrast%] or [NULL %.outdbf%] or [NULL %.tempw%] &THEN
+  &DO
+    &TYPE ---------------------------------------------------------------
+	&TYPE &run dasym_combine.aml <Raster(Units)> <Lookup Table> 
+	&TYPE                        <Join Item> <Attribute> <Aux. Raster>
+    &TYPE                        <Output Raster> <Output Table> <temp space>
+	&TYPE
+    &TYPE PURPOSE  Combine a raster layer containing unique spatial units                
+    &TYPE          (related to a lookup table with numeric attributes)
+	&TYPE          with an auxillary raster layer for dasymetric mapping
+    &TYPE          
+    &TYPE OUTPUT   A combined raster grid and a combined table as a dbf
+    &TYPE  
+	&TYPE *NOTE*   ALL OUTPUT DATASETS SHOULD BE SPECIFIED
+	&TYPE          BY THEIR FULL PATHS
+	&TYPE
+    &TYPE EXAMPLE  
+    &TYPE         
+    &TYPE   &run dasym_combine.aml 
+	&TYPE        C:\WorkSpace\FAO\dasym_test\grids\code 
+	&TYPE        C:\WorkSpace\FAO\dasym_test\lookups\data.dbf
+	&TYPE        code
+	&TYPE        TFC9302 
+	&TYPE        C:\WorkSpace\FAO\dasym_test\grids\landcover2
+	&TYPE        C:\WorkSpace\FAO\dasym_test\try3\combine 
+	&TYPE        C:\WorkSpace\FAO\dasym_test\try3\combine.dbf
+	&TYPE ---------------------------------------------------------------
+    &RETURN
+  &END
+
+
+cw %.tempw%
+w %.tempw%
+
+
+dbaseinfo %.lookup% data
+
+tables
+additem data voiint 16 16 I
+select data
+calculate voiint = %.attribute%
+quit
+
+grid
+voi = RECLASS(%.unitsraster%, data, NODATA, %.joinitem%,voiint) 
+%.outrast% = combine(voi,%.auxrast%)
+quit
+
+infodbase %.outrast%.vat %.outdbf%
+
+w ..
+&RETURN

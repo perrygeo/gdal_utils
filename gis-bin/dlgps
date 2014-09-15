@@ -1,0 +1,74 @@
+#!/bin/bash
+#####################################################
+# dlgps
+#   "Download GPS" 
+#   Retrieves data from a Magellan GPS unit
+#   Creates up to 8 datasets (18 files): 
+#    - .gpx track file
+#    - .gpx waypoint file
+#    - .gpx route
+#    - ESRI shapefile (*.shp, *.shx, *.dbf) with track
+#         as single linestring
+#    - ESRI shapefile (*.shp, *.shx, *.dbf) with each 
+#         segement as a line with time, dist, speed
+#    - ESRI shapefile (*.shp, *.shx, *.dbf) with each 
+#         trackpoint as point with time, elevation
+#    - ESRI shapefile (*.shp, *.shx, *.dbf) with each 
+#         route as a single linestring (?) 
+#    - ESRI shapefile (*.shp, *.shx, *.dbf) with each 
+#         waypoint as point with elev, symbol/class 
+#
+#  Usage: ./getgps.sh
+#
+#  Copyright 2005, Matthew Perry
+#  Updated by perrygeo, 5/30/05
+#  Distributed under the GPL
+#  Requires gpsbabel and gpx2shp 
+#
+#  To do:
+#   - output a .prj file for each shapefile
+#   - insert into postgis table for archiving
+#   - Mapserver app to read the postgis gps archive
+#   - Vertical units (meters->ft)
+#   - get gpsbabel to output routes,waypoints and tracks 
+#       to a single gpx file (?) 
+#   - Accept input args for the outdir
+#####################################################
+
+outdir="/home/perry/data/gps/archive"
+device="/dev/ttyUSB0"
+
+###### Tracks #########
+gpxtrackfile="$outdir/$(date +%y%m%d).gpx"
+
+#Retrieve tracks from gps unit
+echo "Retrieving tracks from GPS unit"
+sudo gpsbabel -t -i magellan,baud=115200 -f $device -o gpx -F $gpxtrackfile
+sudo chown perry:perry $gpxtrackfile
+
+# Creates DATE_t_trk.shp , .dbf, .shx 
+# (Entire track as single linestring)
+echo "Creating shapefiles"
+gpx2shp $gpxtrackfile -a
+
+# Creates DATE_trk_edg.shp , .dbf, .shx
+# (Each segment of each track as linestring with time,distance and speed!)
+gpx2shp $gpxtrackfile -a -e --speed-length-unit mi --speed-time-unit hour
+
+# Creates DATE_t_trk_pnt.shp , .dbf, .shx
+# (Each segment of each track as point with time, elevation, )
+gpx2shp $gpxtrackfile -a -p 
+
+
+###### Waypoints #######
+gpxwptfile="$outdir/$(date +%y%m%d)_w.gpx"
+
+#Retrieve waypoints from gps unit
+#echo "Retrieving Waypoints"
+sudo gpsbabel -w -i magellan,baud=115200 -f $device -o gpx -F $gpxwptfile
+sudo chown perry:perry $gpxwptfile
+
+# Creates DATE_w_trk.shp , .dbf, .shx 
+gpx2shp $gpxwptfile -a
+
+
